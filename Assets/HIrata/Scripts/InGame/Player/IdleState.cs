@@ -4,7 +4,7 @@ public partial class Player
 {
     class IdleState : State
     {
-        public override bool Cantransition(Type currentStateType)
+        public override bool CanTransition(Type currentStateType)
         {
             return true;
         }
