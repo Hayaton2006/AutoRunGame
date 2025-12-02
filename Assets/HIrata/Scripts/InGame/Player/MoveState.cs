@@ -1,16 +1,17 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public partial class PlayerMoveer
 {
     class MoveState : State
     {
-        readonly Transform transform;
+        readonly Rigidbody rigidbody;
         readonly float moveSpeed;
 
-        public MoveState(Transform transform, float moveSpeed)
+        public MoveState(Rigidbody rigidbody, float moveSpeed)
         {
-            this.transform = transform;
+            this.rigidbody  = rigidbody;
             this.moveSpeed = moveSpeed;
         }
 
@@ -29,11 +30,19 @@ public partial class PlayerMoveer
 
         public override void Update()
         {
-            float x = Input.GetAxis("Horizontal");
-            float z = Input.GetAxis("Vertical");
+            float x = 0f;
+            float z = 0f;
 
-            Vector3 move = new Vector3(x, 0, z);
-            transform.Translate(move * moveSpeed * Time.deltaTime, Space.World);
+            if (Keyboard.current != null)
+            {
+                if (Keyboard.current.wKey.isPressed) z = 1;
+                if (Keyboard.current.sKey.isPressed) z = -1;
+                if (Keyboard.current.aKey.isPressed) x = -1;
+                if (Keyboard.current.dKey.isPressed) x = 1;
+            }
+
+            Vector3 move = new Vector3(x, 0, z).normalized;
+            rigidbody.linearVelocity = move * moveSpeed;
         }
     }
 }
