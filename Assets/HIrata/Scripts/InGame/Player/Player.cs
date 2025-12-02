@@ -2,27 +2,23 @@
 
 public partial class Player : MonoBehaviour
 {
+    [SerializeField] Rigidbody rb;
     [SerializeField] float moveSpeed = 5f;
-    [SerializeField] float PlayerScrollSpeed = 1f;
-
     StateMachine stateMachine;
 
-    void Start()
+    void Awake()
     {
         stateMachine = new StateMachine(new IdleState());
     }
 
     void Update()
     {
-        transform.Translate(Vector3.forward * PlayerScrollSpeed * Time.deltaTime);
-
-      
         stateMachine.Update();
     }
 
     public void Select()
     {
-        stateMachine.ChangeState(new MoveState(transform, moveSpeed));
+        stateMachine.ChangeState(new MoveState(rb, moveSpeed));
     }
 
     public void Unselect()

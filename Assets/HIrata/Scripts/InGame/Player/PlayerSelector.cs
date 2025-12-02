@@ -1,43 +1,64 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
+using System.Linq;
 
 public class PlayerSelector : MonoBehaviour
 {
     public static PlayerSelector Instance;
     public Player selectedPlayer;
 
+    private Player[] allPlayers;
+    private int currentIndex = 0;
+
     void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         Instance = this;
+    }
+
+    void Start()
+    {
+        allPlayers = FindObjectsByType<Player>(FindObjectsSortMode.None);
+
+        // ★ 見た目の位置（transform.position.x）で左から順に並べる ★
+        allPlayers = allPlayers
+            .OrderBy(p => p.transform.position.x)
+            .ToArray();
+
+        // 全部 Unselect
+        foreach (var p in allPlayers)
+            p.Unselect();
+
+        // 一番左を選択
+        if (allPlayers.Length > 0)
+        {
+            currentIndex = 0;
+            selectedPlayer = allPlayers[0];
+            selectedPlayer.Select();
+        }
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Keyboard.current.shiftKey.wasPressedThisFrame)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            currentIndex = (currentIndex + 1) % allPlayers.Length;
+
+            selectedPlayer = allPlayers[currentIndex];
+
+            for (int i = 0; i < allPlayers.Length; i++)
             {
-                Player player = hit.collider.GetComponent<Player>();
-                if (player != null)
-                {
-                    selectedPlayer = player;
-
-                    // 修正：Select()/Unselect() を呼ぶ
-                    Player[] allPlayers = UnityEngine.Object.FindObjectsByType<Player>(
-      FindObjectsSortMode.None
-  );
-
-                    foreach (var p in allPlayers)
-                    {
-                        if (p == selectedPlayer)
-                            p.Select();
-                        else
-                            p.Unselect();
-                    }
-
-                    Debug.Log($"選択中プレイヤー: {player.name}");
-                }
+                if (i == currentIndex)
+                    allPlayers[i].Select();
+                else
+                    allPlayers[i].Unselect();
             }
+
+            Debug.Log($"選択中プレイヤー: {selectedPlayer.name}");
         }
     }
 }
