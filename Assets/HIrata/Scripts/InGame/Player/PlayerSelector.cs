@@ -5,7 +5,7 @@ using System.Linq;
 public class PlayerSelector : MonoBehaviour
 {
     public static PlayerSelector Instance;
-    public Player selectedPlayer;
+    public PlayerMoveer selectedPlayer;
 
     private Player[] allPlayers;
     private int currentIndex = 0;

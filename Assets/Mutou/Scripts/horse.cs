@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class horse : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class horse : MonoBehaviour
         if(horsehp == 0)
         {
             Destroy(gameObject);
+            SceneManager.LoadScene("GameOver");
         }
     }
 

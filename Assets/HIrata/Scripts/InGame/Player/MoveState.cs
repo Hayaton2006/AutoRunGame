@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public partial class Player
+public partial class PlayerMoveer
 {
     class MoveState : State
     {
