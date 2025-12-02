@@ -7,7 +7,7 @@ public class PlayerSelector : MonoBehaviour
     public static PlayerSelector Instance;
     public PlayerMoveer selectedPlayer;
 
-    private Player[] allPlayers;
+    private PlayerMoveer[] allPlayers;
     private int currentIndex = 0;
 
     void Awake()
@@ -22,7 +22,7 @@ public class PlayerSelector : MonoBehaviour
 
     void Start()
     {
-        allPlayers = FindObjectsByType<Player>(FindObjectsSortMode.None);
+        allPlayers = FindObjectsByType<PlayerMoveer>(FindObjectsSortMode.None);
 
         // ★ 見た目の位置（transform.position.x）で左から順に並べる ★
         allPlayers = allPlayers
