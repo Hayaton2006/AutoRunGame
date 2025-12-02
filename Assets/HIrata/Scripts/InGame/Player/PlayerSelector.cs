@@ -3,7 +3,7 @@
 public class PlayerSelector : MonoBehaviour
 {
     public static PlayerSelector Instance;
-    public Player selectedPlayer;
+    public PlayerMoveer selectedPlayer;
 
     void Awake()
     {
@@ -17,13 +17,13 @@ public class PlayerSelector : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                Player player = hit.collider.GetComponent<Player>();
+                PlayerMoveer player = hit.collider.GetComponent<PlayerMoveer>();
                 if (player != null)
                 {
                     selectedPlayer = player;
 
                     // 修正：Select()/Unselect() を呼ぶ
-                    Player[] allPlayers = UnityEngine.Object.FindObjectsByType<Player>(
+                    PlayerMoveer[] allPlayers = UnityEngine.Object.FindObjectsByType<PlayerMoveer>(
       FindObjectsSortMode.None
   );
 

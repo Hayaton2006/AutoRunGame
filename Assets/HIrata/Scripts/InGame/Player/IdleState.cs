@@ -1,6 +1,6 @@
 ﻿using System;
 
-public partial class Player
+public partial class PlayerMoveer
 {
     class IdleState : State
     {

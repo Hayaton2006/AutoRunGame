@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public partial class Player : MonoBehaviour
+public partial class PlayerMoveer : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float PlayerScrollSpeed = 1f;
