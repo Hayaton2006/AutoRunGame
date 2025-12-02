@@ -6,7 +6,7 @@ public class EnemyChase : MonoBehaviour
     [Header("プレイヤー検出距離")]
     [SerializeField] float detectionRange;
     private GameObject target;
-    Player player;
+    PlayerMoveer player;
     public float Enemyspeed;
     public float Chasespeed;
     [SerializeField] GameObject Player;
@@ -15,7 +15,7 @@ public class EnemyChase : MonoBehaviour
     {
         Enemyspeed = 0.005f;
         target = GameObject.Find("horse");
-        player = Player.GetComponent<Player>();
+        player = Player.GetComponent<PlayerMoveer>();
     }
 
     void Update()

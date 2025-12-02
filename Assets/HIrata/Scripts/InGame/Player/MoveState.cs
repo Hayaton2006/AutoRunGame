@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public partial class Player
+public partial class PlayerMoveer
 {
     class MoveState : State
     {
