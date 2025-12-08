@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 
-public partial class PlayerMoveer : MonoBehaviour
+public partial class Player : MonoBehaviour
 {
     [SerializeField] Rigidbody rb;
     [SerializeField] float moveSpeed = 5f;
+    [SerializeField] float forwardSpeed = 5f;
     StateMachine stateMachine;
 
     void Awake()
     {
-        stateMachine = new StateMachine(new IdleState());
+        stateMachine = new StateMachine(new ForwardState(rb, forwardSpeed));
     }
 
     void Update()
@@ -18,11 +19,11 @@ public partial class PlayerMoveer : MonoBehaviour
 
     public void Select()
     {
-        stateMachine.ChangeState(new MoveState(rb, moveSpeed));
+        stateMachine.ChangeState(new SelectState(rb, moveSpeed));
     }
 
     public void Unselect()
     {
-        stateMachine.ChangeState(new IdleState());
+        stateMachine.ChangeState(new ForwardState(rb, forwardSpeed));
     }
 }
