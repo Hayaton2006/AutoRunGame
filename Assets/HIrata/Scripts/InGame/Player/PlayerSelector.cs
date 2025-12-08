@@ -5,9 +5,9 @@ using System.Linq;
 public class PlayerSelector : MonoBehaviour
 {
     public static PlayerSelector Instance;
-    public PlayerMoveer selectedPlayer;
+    public Player selectedPlayer;
 
-    private PlayerMoveer[] allPlayers;
+    private Player[] allPlayers;
     private int currentIndex = 0;
 
     void Awake()
@@ -22,9 +22,9 @@ public class PlayerSelector : MonoBehaviour
 
     void Start()
     {
-        allPlayers = FindObjectsByType<PlayerMoveer>(FindObjectsSortMode.None);
+        allPlayers = FindObjectsByType<Player>(FindObjectsSortMode.None);
 
-        // ★ 見た目の位置（transform.position.x）で左から順に並べる ★
+        // 見た目の位置（transform.position.x）で左から順に並べる
         allPlayers = allPlayers
             .OrderBy(p => p.transform.position.x)
             .ToArray();
