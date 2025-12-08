@@ -7,6 +7,7 @@ public partial class Enemy : MonoBehaviour
     [SerializeField] float detectionRange;
     [SerializeField] bool ishorse;
     StateMachine stateMachine;
+    [SerializeField]EnemyAnimator animator;
     GameObject target;
 
 
@@ -32,6 +33,7 @@ public partial class Enemy : MonoBehaviour
         // Playerが検出範囲に侵入している場合
         if (dis <= detectionRange && stateMachine.GetStateType() != typeof(ChaseState))
         {
+           animator.RunState();
            stateMachine.ChangeState(new ChaseState(transform, target, chasespeed));
         }
     }
