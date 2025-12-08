@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class PlayCharacter : MonoBehaviour
 {
+    [SerializeField] private float moveSpeed = 5.0f;
+    [SerializeField] public float playerPower;
     private void Update()
     {
         if (Keyboard.current.wKey.isPressed)
@@ -22,7 +24,6 @@ public class PlayCharacter : MonoBehaviour
             transform.Translate(moveSpeed, 0, 0);
         }
     }
-    [SerializeField] private float moveSpeed = 5.0f;
 
     //private Rigidbody rb;
     //private MyControls controls;
